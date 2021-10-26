@@ -141,14 +141,13 @@ inoremap <leader><leader><leader> <Esc>/<++><Enter>"_c4l
 vnoremap <leader><leader><leader> <Esc>/<++><Enter>"_c4l
 nnoremap <leader><leader><leader> <Esc>/<++><Enter>"_c4l"
 
-nnoremap <leader>U <Esc>/D3134357<Enter>
 
 " Autocompletar parentesis, llaves, corchetes, etc
 " inoremap ( ()<Esc>i
 " inoremap { {}<Esc>i
 " inoremap {<CR> {<CR>}<Esc>O
 " inoremap [ []<Esc>i
-inoremap < <><Esc>i 
+" inoremap < <><Esc>i 
 " inoremap ' ''<Esc>i 
 " inoremap " ""<Esc>i 
 
@@ -158,11 +157,16 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 noremap Q !!$SHELL<CR>
 
 " Replace all is aliased to S.
-  nnoremap S :%s//g<Left><Left>
+nnoremap S :%s//g<Left><Left>
+
+" Configuración de Temas:
+
+"--onedark config--
+"colorscheme onedark
 
 "--gruvbox config--
-"colorscheme onedark
-"let g:gruvbox_contrast_dark = "medium"
+colorscheme gruvbox 
+let g:gruvbox_contrast_dark = "medium"
 
 set cmdheight=1
 "--tokyonight config--
@@ -173,10 +177,11 @@ set cmdheight=1
 " monokai config --
 "let g:monokai_term_italic = 1
 "let g:monokai_gui_italic = 1
-colorscheme monokai
+" colorscheme monokai
 
 "Close tags automatically
-"Cerrar tags automaticamente
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.jsx, *.js'
 "-----------------------------------------------------------------
 
+" Busquedas personalizadas
+nnoremap <leader>U <Esc>/D3134357<Enter>
