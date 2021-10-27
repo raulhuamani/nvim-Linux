@@ -4,10 +4,14 @@
 "██║██║╚████║██║░░░██║░░░░░░░╚████╔╝░██║██║╚██╔╝██║
 "██║██║░╚███║██║░░░██║░░░██╗░░╚██╔╝░░██║██║░╚═╝░██║
 "╚═╝╚═╝░░╚══╝╚═╝░░░╚═╝░░░╚═╝░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝
-"𝕓𝕪 𝕁𝕠𝕒𝕢𝕦𝕚𝕟 𝕍𝕒𝕣𝕖𝕝𝕒 𝕐𝕋    
-"https://www.youtube.com/channel/UCw1Ipy5_P1OL0zUJMfYC7-A
-
+"𝕓𝕪 Raju
+"https://github.com/raulhuamani/nvim-linux
 "---------------------------------vim config---------------------------- 
+
+" Configurando <leader> shortcut
+let mapleader = " "
+
+" Configuraciones Basicas
 syntax on 
 set number 
 set mouse=a
@@ -26,49 +30,21 @@ set clipboard=unnamed
 set encoding=UTF-8
 set cursorline
 set termguicolors
+set ruler
 
 set colorcolumn=160
 highlight ColoColumn ctermbg=0 guibg=lightgrey
 
+" Display option
 set showcmd
-set ruler
 set showmatch
-
-let mapleader = " "
 
 set laststatus=2
 set backspace=2
 set guioptions-=T
 set guioptions-=L
 
-" Se valida si tiene instalado Vim-Plug
-if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ~/.config/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
-endif
-
-
-"Get out of insert mode 
-"Salir de modo insertar
-" imap jk <Esc>
-"imap <C-c> <Esc>l
-
-"mueve bloques de codigo en modo visual o V-Line
-"Moves Blocks of code in visual mode or V-Line xnoremap K :move '<-2<CR>gv-gv xnoremap J :move '>+1<CR>gv-gv 
-xnoremap K :move '<-2<CR>gv-gv
-xnoremap J :move '>+1<CR>gv-gv 
-" Better indenting
-" Mejor Indentación
-vnoremap < <gv
-vnoremap > >gv
-
-"-------------------------------Sources-------------------------------
-source ~/.config/nvim/plugins/plugins.vim
-source ~/.config/nvim/plugins/plug-config.vim
-source ~/.config/nvim/themes/onedark.vim
-"--------------------------------Plugins Config--------------------------------------------
-
+" Valida el tipo de fuente dependiendo el SO:
 if has("gui_running")
   if has("gui_gtk2")
     set guifont=Inconsolata\12
@@ -78,9 +54,39 @@ if has("gui_running")
     set guifont=Consolas:h11:cANSI
   endif
 endif
+
+" Valida si tiene instalado Vim-Plug para utilizar plugins:
+if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p ~/.config/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+endif
+
+"-------------------------------Sources-------------------------------
+source ~/.config/nvim/plugins/plugins.vim
+source ~/.config/nvim/plugins/plug-config.vim
+source ~/.config/nvim/themes/onedark.vim
+"--------------------------------Plugins Config--------------------------------------------
+
 "Actualizar fuente
 nmap <F5> :source ~/.config/nvim/init.vim<CR>
 vmap <F5> :source ~/.config/nvim/init.vim<CR>
+
+
+" Funcionalidades Practicas:
+
+"Salir de modo insertar
+" imap jk <Esc>
+"imap <C-c> <Esc>l
+
+" Mueve bloques de codigo en modo visual o V-Line (Hacia abajo J y arriba K)
+xnoremap J :move '>+1<CR>gv-gv 
+xnoremap K :move '<-2<CR>gv-gv
+
+" Better indenting
+" Mejor Indentación (como TAB: > - derecha y < - izquierda)
+vnoremap < <gv
+vnoremap > >gv
 
 "disable the arrow keys to navigate. This is very useful when you want to
 "adapt to 'hjkl'
@@ -96,26 +102,24 @@ nnoremap <silent> <up> :resize +5<CR>
 nnoremap <silent> <down> :resize -5<CR>
 
 "save file
-"guardar archivo
 nmap <leader>w :w <CR>
 nmap <leader>wq :wq <CR>
-"cerrar ventana
 "close current  window
 nmap <C-w> :q! <CR>
 nmap <leader>q :q <CR>
 nmap <leader>so :so%<CR>
+
 "search commands 
-"comandos de busqueda
 nmap <leader>gs  :CocSearch
 nmap <leader>fs :FZF<CR>
 nmap <leader>rg :Rg<CR>
+
 "configuracion de tabs
 let g:indentLine_enabled = 1
 let g:indentLine_char = '▏'
 let g:indentLine_faster = 1
 let g:indentLine_fileTypeExclude=["nerdtree"]
 
-"abrir Nerdtree
 "open nerdtree
 nmap <Leader>e :NERDTree<CR>
 let NERDTreeQuitOnOpen=1
@@ -135,6 +139,7 @@ nnoremap <silent> <S-TAB> :bprevious<CR>
 "cerrar buffer
 nmap <leader>bd :bdelete<CR>
 
+
 " Navegando con guias
 inoremap ;gui <++>
 inoremap <leader><leader><leader> <Esc>/<++><Enter>"_c4l
@@ -152,12 +157,9 @@ nnoremap <leader><leader><leader> <Esc>/<++><Enter>"_c4l"
 " inoremap " ""<Esc>i 
 
 " Disables automatic commenting on newline:
+" Deshabilita la continuacion de comentarios en la linea siguiente:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-noremap Q !!$SHELL<CR>
-
-" Replace all is aliased to S.
-nnoremap S :%s//g<Left><Left>
 
 " Configuración de Temas:
 
@@ -183,5 +185,19 @@ set cmdheight=1
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.jsx, *.js'
 "-----------------------------------------------------------------
 
-" Busquedas personalizadas
+
+" comandos personalizados personalizadas:
+noremap Q !!$SHELL<CR>
+
+" Replace all is aliased to S.
+nnoremap S :%s//g<Left><Left>
+
 nnoremap <leader>U <Esc>/D3134357<Enter>
+" Seleccionar todo
+nnoremap <C-a> <esc>ggVG<CR>
+
+" copy or paste from X11 clipboard 
+" http://vim.wikia.com/wiki/GNU/Linux_clipboard_copy/paste_with_xclip
+vmap <C-y> :!xclip -f -sel clip<CR>
+map <C-p> mz:-1r !xclip -o -sel clip<CR>`z
+
