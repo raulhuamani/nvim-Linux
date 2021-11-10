@@ -29,11 +29,18 @@ set ignorecase
 set clipboard=unnamed
 set encoding=UTF-8
 set cursorline
-set termguicolors
 set ruler
 
-set colorcolumn=160
-highlight ColoColumn ctermbg=0 guibg=lightgrey
+" Support 24-bit color
+execute "set t_8f=\e[38;2;%lu;%lu;%lum"
+execute "set t_8b=\e[48;2;%lu;%lu;%lum"
+
+if (has("termguicolors"))
+    set termguicolors
+endif
+
+"set colorcolumn=160
+"highlight ColoColumn ctermbg=0 guibg=lightgrey
 
 " Display option
 set showcmd
@@ -167,14 +174,24 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "colorscheme onedark
 
 "--gruvbox config--
-colorscheme gruvbox 
-let g:gruvbox_contrast_dark = "medium"
+"colorscheme gruvbox 
+"let g:gruvbox_contrast_dark = "medium"
+"let g:gruvbox_transparent_bg = 1
 
 set cmdheight=1
 "--tokyonight config--
-"let g:tokyonight_style = 'night' " available: night, storm
-"let g:tokyonight_enable_italic = 0
-"colorscheme tokyonight
+let g:tokyonight_style = 'storm' " available: night, storm
+"set background=dark
+let g:tokyonight_enable_italic = 1
+let g:tokyonight_disable_italic_comment = 1
+"let g:tokyonight_transparent_background = 1
+colorscheme tokyonight
+let g:lightline = {'colorscheme' : 'tokyonight'}
+
+" for transparent background
+"highlight Normal ctermbg=NONE
+"highlight NonText ctermbg=NONE ctermfg=NONE
+"highlight Visual cterm=reverse ctermbg=NONE
 
 " monokai config --
 "let g:monokai_term_italic = 1

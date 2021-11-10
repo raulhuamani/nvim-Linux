@@ -2,12 +2,14 @@
 call plug#begin('~/.config/nvim/plugged')
 " Temas
 " Themes
-Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
+" Plug 'morhetz/gruvbox'
+" Plug 'shinchu/lightline-gruvbox.vim'
 " Plug 'sheerun/vim-polyglot'
 " Plug 'joshdick/onedark.vim'
 " Plug 'safv12/andromeda.vim'
-" Plug 'ghifarit53/tokyonight-vim'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'itchyny/lightline.vim'
+
 " Plug 'ayu-theme/ayu-vim'
 " Plug 'crusoexia/vim-monokai'
 
